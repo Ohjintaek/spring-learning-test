@@ -47,12 +47,14 @@ class WebMvcConfigurationTest {
      */
     @Test
     void addInterceptors() {
-        RestAssured
+        ExtractableResponse<Response> response = RestAssured
                 .given().log().all()
                 .when().get("/admin/members")
                 .then().log().all()
-                .statusCode(HttpStatus.UNAUTHORIZED.value())
                 .extract();
+
+        // then
+        Assertions.assertThat(response.statusCode()).isEqualTo(HttpStatus.UNAUTHORIZED.value());
     }
 
     /**
@@ -65,11 +67,13 @@ class WebMvcConfigurationTest {
      */
     @Test
     void addArgumentResolvers() {
-        RestAssured
+        ExtractableResponse<Response> response = RestAssured
                 .given().log().all()
                 .when().get("/favorites")
                 .then().log().all()
-                .statusCode(HttpStatus.OK.value())
                 .extract();
+
+        //then
+        Assertions.assertThat(response.statusCode()).isEqualTo(HttpStatus.OK.value());
     }
 }
