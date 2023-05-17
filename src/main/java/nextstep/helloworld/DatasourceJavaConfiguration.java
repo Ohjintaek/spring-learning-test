@@ -13,6 +13,9 @@ public class DatasourceJavaConfiguration {
     @Bean
     public DataSource getDataSource() {
         DataSourceBuilder dataSourceBuilder = DataSourceBuilder.create();
+        dataSourceBuilder.username("SA");
+        dataSourceBuilder.password("");
+        dataSourceBuilder.url("jdbc:h2:mem:test");
         return dataSourceBuilder.build();
     }
 }
